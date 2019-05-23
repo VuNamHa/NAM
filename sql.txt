@@ -1,0 +1,92 @@
+create database CuahangGiaThinh2
+go
+use CuahangGiaThinh2
+create table tbltaikhoan
+(
+taikhoan nvarchar(50)Primary key,
+matkhau nvarchar(50)not null
+)
+create table tblhang
+(
+mahang char(10)Primary key,
+tenhang nvarchar(50),
+dvt nvarchar(50),
+soluong int  check (soluong>=0),
+dongianhap float  check (dongianhap>=0),
+dongiaban float  check (dongiaban>=0),
+anh nvarchar(200),
+ghichu nvarchar(200)
+)
+create table tblncc
+(
+mancc char(10)Primary key,
+tenncc nvarchar(50),
+diachi nvarchar(50),
+dienthoai nvarchar(15),
+
+)
+create table tblnhanvien
+(
+manv char(10)Primary key,
+hoten nvarchar(50),
+gioitinh nvarchar(15),
+ngaysinh date  check (ngaysinh <getdate()),
+dienthoai nvarchar(15),
+diachi nvarchar(50),
+chucvu nvarchar(50),
+mucluong money )
+create table tblkhach
+(
+makhach char(10)Primary key,
+tenkhach nvarchar(50),
+diachi nvarchar(50),
+dienthoai nvarchar(15)
+)
+create table tblhdnhap
+(
+mahdnhap char(20)Primary key,
+manv char(10),
+mancc char(10),
+ngaynhap datetime ,
+tongtien float  check (tongtien>=0),
+Foreign key (manv)references tblnhanvien(manv),
+Foreign key (mancc)references tblncc(mancc)
+)
+create table tblchitiethdnhap
+(
+mahdnhap char(20),
+mahang char(10),
+Primary key( mahdnhap, mahang),
+soluong int  check(soluong>=0),
+dongia float  check(dongia>=0),
+chietkhau float  check(chietkhau>=0),
+thanhtien float  check(thanhtien>=0),
+Foreign key (mahang)references tblhang(mahang),
+Foreign key (mahdnhap)references tblhdnhap(mahdnhap)
+
+)
+create table tblhdban
+(
+mahdban char(20)Primary key,
+manv char(10),
+ngayban datetime,
+makhach char(10),
+tongtien float  check(tongtien>=0),
+Foreign key (manv)references tblnhanvien(manv),
+Foreign key (makhach)references tblkhach(makhach)
+)
+create table tblchitiethdban
+(
+mahdban char(20),
+mahang char(10),
+Primary key( mahdban, mahang),
+soluong int  check(soluong>=0),
+dongia float  check(dongia>=0),
+khuyenmai nvarchar(50),
+thanhtien float  check(thanhtien>=0),
+Foreign key (mahdban)references tblhdban(mahdban),
+Foreign key (mahang)references tblhang(mahang)
+)
+
+
+insert into tbltaikhoan values('1','1')
