@@ -62,7 +62,7 @@ namespace Cuahangbangas
 
         private void hóaĐơnNhậpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Hoadonnhap f = new Hoadonnhap();
+            Hoadonnhap1 f = new Hoadonnhap1();
             f.Show();
         }
 
@@ -78,11 +78,6 @@ namespace Cuahangbangas
             f.Show();
         }
 
-        private void hỗTrợToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Hotro f = new Hotro();
-            f.Show();
-        }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Cuahangbangas
 {
-    partial class Hoadonnhap
+    partial class Hoadonnhap1
     {
         /// <summary>
         /// Required designer variable.
@@ -97,10 +97,10 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox1.Location = new System.Drawing.Point(22, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(694, 163);
-            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chung";
             // 
@@ -125,7 +125,7 @@
             this.cboncc.Name = "cboncc";
             this.cboncc.Size = new System.Drawing.Size(134, 24);
             this.cboncc.TabIndex = 14;
-            this.cboncc.SelectedIndexChanged += new System.EventHandler(this.cboncc_SelectedIndexChanged);
+            this.cboncc.TextChanged += new System.EventHandler(this.cboncc_TextChanged);
             // 
             // txttenncc
             // 
@@ -148,7 +148,7 @@
             this.cbomanhanvien.Name = "cbomanhanvien";
             this.cbomanhanvien.Size = new System.Drawing.Size(134, 24);
             this.cbomanhanvien.TabIndex = 10;
-            this.cbomanhanvien.SelectedIndexChanged += new System.EventHandler(this.cbomanhanvien_SelectedIndexChanged);
+            this.cbomanhanvien.TextChanged += new System.EventHandler(this.cbomanhanvien_TextChanged);
             // 
             // mskngaynhap
             // 
@@ -253,10 +253,10 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox2.Location = new System.Drawing.Point(22, 181);
+            this.groupBox2.Location = new System.Drawing.Point(12, 181);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(690, 210);
-            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin các mặt hàng";
             // 
@@ -297,6 +297,7 @@
             this.txtSoluong.Size = new System.Drawing.Size(134, 22);
             this.txtSoluong.TabIndex = 13;
             this.txtSoluong.TextChanged += new System.EventHandler(this.txtSoluong_TextChanged);
+            this.txtSoluong.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSoluong_KeyPress);
             // 
             // cbochietkhau
             // 
@@ -309,7 +310,8 @@
             this.cbochietkhau.Name = "cbochietkhau";
             this.cbochietkhau.Size = new System.Drawing.Size(134, 24);
             this.cbochietkhau.TabIndex = 12;
-            this.cbochietkhau.SelectedIndexChanged += new System.EventHandler(this.cbochietkhau_SelectedIndexChanged);
+            this.cbochietkhau.DropDown += new System.EventHandler(this.cbochietkhau_DropDown);
+            this.cbochietkhau.TextChanged += new System.EventHandler(this.cbochietkhau_TextChanged);
             // 
             // cboMahang
             // 
@@ -318,7 +320,7 @@
             this.cboMahang.Name = "cboMahang";
             this.cboMahang.Size = new System.Drawing.Size(134, 24);
             this.cboMahang.TabIndex = 11;
-            this.cboMahang.SelectedIndexChanged += new System.EventHandler(this.cboMahang_SelectedIndexChanged);
+            this.cboMahang.TextChanged += new System.EventHandler(this.cboMahang_TextChanged);
             // 
             // label14
             // 
@@ -388,10 +390,10 @@
             this.panel1.Controls.Add(this.labelbangchu);
             this.panel1.Controls.Add(this.txtTongtien);
             this.panel1.Controls.Add(this.label15);
-            this.panel1.Location = new System.Drawing.Point(22, 397);
+            this.panel1.Location = new System.Drawing.Point(12, 397);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(709, 103);
-            this.panel1.TabIndex = 31;
+            this.panel1.TabIndex = 32;
             // 
             // cbbmahdnhap
             // 
@@ -400,7 +402,7 @@
             this.cbbmahdnhap.Name = "cbbmahdnhap";
             this.cbbmahdnhap.Size = new System.Drawing.Size(113, 21);
             this.cbbmahdnhap.TabIndex = 29;
-            this.cbbmahdnhap.SelectedIndexChanged += new System.EventHandler(this.cbbmahdnhap_SelectedIndexChanged);
+            this.cbbmahdnhap.DropDown += new System.EventHandler(this.cbbmahdnhap_DropDown);
             // 
             // btnTimkiem
             // 
@@ -516,18 +518,18 @@
             this.label15.TabIndex = 18;
             this.label15.Text = "Tổng tiền";
             // 
-            // Hoadonnhap
+            // Hoadonnhap1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(768, 498);
+            this.ClientSize = new System.Drawing.Size(728, 499);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Name = "Hoadonnhap";
-            this.Text = "Hoadonnhap";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Hoadonnhap_FormClosing);
-            this.Load += new System.EventHandler(this.Hoadonnhap_Load);
+            this.Name = "Hoadonnhap1";
+            this.Text = "Hoadonnhap1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Hoadonnhap1_FormClosing);
+            this.Load += new System.EventHandler(this.Hoadonnhap1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

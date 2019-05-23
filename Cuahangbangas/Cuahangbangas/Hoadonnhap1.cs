@@ -11,68 +11,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using COMExcel = Microsoft.Office.Interop.Excel;
 
+
 namespace Cuahangbangas
 {
-    public partial class Hoadonnhap : Form
+    public partial class Hoadonnhap1 : Form
     {
-        public Hoadonnhap()
+        public Hoadonnhap1()
         {
             InitializeComponent();
         }
         DataTable tblCTHDN;
-        private void txtSoluong_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridViewChitiet_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            string mahang;
-            Double Thanhtien;
-            if (tblCTHDN.Rows.Count == 0)
-            {
-                MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            if ((MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
-            {
-                mahang = dataGridViewChitiet.CurrentRow.Cells["mahang"].Value.ToString();
-                DelHang(txtmahdnhap.Text, mahang);
-                Thanhtien = Convert.ToDouble(dataGridViewChitiet.CurrentRow.Cells["thanhtien"].Value.ToString());
-                DelUpdateTongtien(txtmahdnhap.Text, Thanhtien);
-                Load_DataGridViewChitiet();
-            }
-        }
-
-        private void DelUpdateTongtien(string Mahoadon, double Thanhtien)
-        {
-            Double Tong, Tongmoi;
-            string sql;
-            sql = "SELECT tongtien FROM tblhdnhap WHERE mahdnhap = N'" + Mahoadon + "'";
-            Tong = Convert.ToDouble(Functions.GetFieldValues(sql));
-            Tongmoi = Tong - Thanhtien;
-            sql = "UPDATE tblhdnhap SET tongtien =" + Tongmoi + " WHERE mahdnhap = N'" + Mahoadon + "'";
-            Functions.RunSql(sql);
-            txtTongtien.Text = Tongmoi.ToString();
-            labelbangchu.Text = "Bằng chữ: " + Functions.ChuyenSoSangChu(Tongmoi.ToString());
-        }
-
-        private void DelHang(string Mahoadon, string Mahang)
-        {
-            Double s, sl, SLcon;
-            string sql;
-            sql = "SELECT soluong FROM tblchitiethdnhap WHERE mahdnhap = N'" + Mahoadon + "' AND mahang=N'" + Mahang + "'";
-            s = Convert.ToDouble(Functions.GetFieldValues(sql));
-            sql = "DELETE tblchitiethdnhap WHERE mahdnhap=N'" + Mahoadon + "' AND mahang = N'" + Mahang + "'";
-            Functions.RunSqlDel(sql);
-            sql = "SELECT soluong FROM tblhang WHERE mahang = N'" + Mahang + "'";
-            sl = Convert.ToDouble(Functions.GetFieldValues(sql));
-            SLcon = sl - s;
-            sql = "UPDATE tblhang SET soluong =" + SLcon + " WHERE mahang= N'" + Mahang + "'";
-            Functions.RunSql(sql);
-        }
-
-        private void Hoadonnhap_Load(object sender, EventArgs e)
+        private void Hoadonnhap1_Load(object sender, EventArgs e)
         {
             btnThemmoi.Enabled = true;
             btnLuu.Enabled = false;
@@ -104,12 +53,13 @@ namespace Cuahangbangas
                 btnInhoadon.Enabled = true;
             }
             Load_DataGridViewChitiet();
-        }
 
+        }
         private void Load_DataGridViewChitiet()
         {
             string sql;
             sql = "SELECT a.mahang, b.tenhang, a.soluong, b.dongianhap, a.chietkhau, a.thanhtien FROM tblchitiethdnhap AS a, tblhang AS b WHERE a.mahdnhap = N'" + txtmahdnhap.Text + "' AND a.mahang=b.mahang";
+
             tblCTHDN = Functions.GetDataToTable(sql);
             dataGridViewChitiet.DataSource = tblCTHDN;
             dataGridViewChitiet.Columns[0].HeaderText = "Mã hàng";
@@ -126,9 +76,7 @@ namespace Cuahangbangas
             dataGridViewChitiet.Columns[5].Width = 120;
             dataGridViewChitiet.AllowUserToAddRows = false;
             dataGridViewChitiet.EditMode = DataGridViewEditMode.EditProgrammatically;
-
         }
-
         private void Load_ThongtinHD()
         {
             string str;
@@ -141,7 +89,6 @@ namespace Cuahangbangas
             str = "SELECT tongtien FROM tblhdnhap WHERE mahdnhap = N'" + txtmahdnhap.Text + "'";
             txtTongtien.Text = Functions.GetFieldValues(str);
             labelbangchu.Text = "Bằng chữ: " + Functions.ChuyenSoSangChu(txtTongtien.Text);
-
         }
 
         private void btnThemmoi_Click(object sender, EventArgs e)
@@ -151,6 +98,7 @@ namespace Cuahangbangas
             btnInhoadon.Enabled = false;
             btnThemmoi.Enabled = false;
             ResetValues();
+            //txtmahdnhap.Text = Functions.CreateKey("HDN");
             Load_DataGridViewChitiet();
         }
         private void ResetValues()
@@ -250,7 +198,6 @@ namespace Cuahangbangas
             btnInhoadon.Enabled = true;
 
         }
-
         private void ResetValuesHang()
         {
             cboMahang.Text = "";
@@ -259,6 +206,51 @@ namespace Cuahangbangas
             txtThanhtien.Text = "0";
             txtTenhang.Text = "";
             txtDongia.Text = "";
+        }
+
+        private void dataGridViewChitiet_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string mahang;
+            Double Thanhtien;
+            if (tblCTHDN.Rows.Count == 0)
+            {
+                MessageBox.Show("Không có dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if ((MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes))
+            {
+                mahang = dataGridViewChitiet.CurrentRow.Cells["mahang"].Value.ToString();
+                DelHang(txtmahdnhap.Text, mahang);
+                Thanhtien = Convert.ToDouble(dataGridViewChitiet.CurrentRow.Cells["thanhtien"].Value.ToString());
+                DelUpdateTongtien(txtmahdnhap.Text, Thanhtien);
+                Load_DataGridViewChitiet();
+            }
+        }
+        private void DelHang(string Mahoadon, string Mahang)
+        {
+            Double s, sl, SLcon;
+            string sql;
+            sql = "SELECT soluong FROM tblchitiethdnhap WHERE mahdnhap = N'" + Mahoadon + "' AND mahang=N'" + Mahang + "'";
+            s = Convert.ToDouble(Functions.GetFieldValues(sql));
+            sql = "DELETE tblchitiethdnhap WHERE mahdnhap=N'" + Mahoadon + "' AND mahang = N'" + Mahang + "'";
+            Functions.RunSqlDel(sql);
+            sql = "SELECT soluong FROM tblhang WHERE mahang = N'" + Mahang + "'";
+            sl = Convert.ToDouble(Functions.GetFieldValues(sql));
+            SLcon = sl - s;
+            sql = "UPDATE tblhang SET soluong =" + SLcon + " WHERE mahang= N'" + Mahang + "'";
+            Functions.RunSql(sql);
+        }
+        private void DelUpdateTongtien(string Mahoadon, double Thanhtien)
+        {
+            Double Tong, Tongmoi;
+            string sql;
+            sql = "SELECT tongtien FROM tblhdnhap WHERE mahdnhap = N'" + Mahoadon + "'";
+            Tong = Convert.ToDouble(Functions.GetFieldValues(sql));
+            Tongmoi = Tong - Thanhtien;
+            sql = "UPDATE tblhdnhap SET tongtien =" + Tongmoi + " WHERE mahdnhap = N'" + Mahoadon + "'";
+            Functions.RunSql(sql);
+            txtTongtien.Text = Tongmoi.ToString();
+            labelbangchu.Text = "Bằng chữ: " + Functions.ChuyenSoSangChu(Tongmoi.ToString());
         }
 
         private void btnXoaHD_Click(object sender, EventArgs e)
@@ -290,16 +282,16 @@ namespace Cuahangbangas
             }
         }
 
-        private void cbomanhanvien_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbomanhanvien_TextChanged(object sender, EventArgs e)
         {
             string str;
             if (cbomanhanvien.Text == "")
-               txtTennhanvien.Text = "";
+                txtTennhanvien.Text = "";
             str = "Select hoten from tblnhanvien where manv =N'" + cbomanhanvien.SelectedValue + "'";
             txtTennhanvien.Text = Functions.GetFieldValues(str);
         }
 
-        private void cboncc_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboncc_TextChanged(object sender, EventArgs e)
         {
             string str;
             if (cboncc.Text == "")
@@ -316,7 +308,7 @@ namespace Cuahangbangas
             txtdienthoai.Text = Functions.GetFieldValues(str);
         }
 
-        private void cboMahang_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboMahang_TextChanged(object sender, EventArgs e)
         {
             string str;
             if (cboMahang.Text == "")
@@ -329,7 +321,8 @@ namespace Cuahangbangas
             str = "SELECT dongianhap FROM tblhang WHERE mahang =N'" + cboMahang.SelectedValue + "'";
             txtDongia.Text = Functions.GetFieldValues(str);
         }
-        private void TxtSoluong_TextChanged(object sender, EventArgs e)
+
+        private void txtSoluong_TextChanged(object sender, EventArgs e)
         {
             double tt, sl, dg, gg;
             if (txtSoluong.Text == "")
@@ -346,8 +339,8 @@ namespace Cuahangbangas
                 dg = Convert.ToDouble(txtDongia.Text);
             tt = sl * dg - sl * dg * gg / 100;
             txtThanhtien.Text = tt.ToString();
-
         }
+
         private void cbochietkhau_TextChanged(object sender, EventArgs e)
         {
             double tt, sl, dg, gg;
@@ -481,16 +474,17 @@ namespace Cuahangbangas
             cbbmahdnhap.SelectedIndex = -1;
         }
 
-        private void cbbmahdnhap_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbbmahdnhap_DropDown(object sender, EventArgs e)
         {
             Functions.FillCombo("SELECT mahdnhap FROM tblhdnhap", cbbmahdnhap, "mahdnhap", "mahdnhap");
             cbbmahdnhap.SelectedIndex = -1;
         }
 
-        private void Hoadonnhap_FormClosing(object sender, FormClosingEventArgs e)
+        private void Hoadonnhap1_FormClosing(object sender, FormClosingEventArgs e)
         {
             ResetValues();
         }
+
         private void txtSoluong_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (((e.KeyChar >= '0') && (e.KeyChar <= '9')) || (Convert.ToInt32(e.KeyChar) == 8))
@@ -501,7 +495,6 @@ namespace Cuahangbangas
 
         private void btnBoqua_Click(object sender, EventArgs e)
         {
-
             ResetValues();
             mskngaynhap.Text = "";
             txtTenhang.Text = "";
@@ -515,7 +508,7 @@ namespace Cuahangbangas
             btnLuu.Enabled = false;
         }
 
-        private void cbochietkhau_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbochietkhau_DropDown(object sender, EventArgs e)
         {
             cbochietkhau.Items.Clear();
             cbochietkhau.Items.Add("3");
